@@ -24,7 +24,8 @@ function sleep(enemy)
 end
 
 function next_time_asleep()
-  return enemy_min_before_asleep + rnd(enemy_max_before_asleep)
+  local mx = enemy_max_before_asleep - enemy_min_before_asleep
+  return enemy_min_before_asleep + rnd(mx)
 end
 
 function check_collision(enemy)
