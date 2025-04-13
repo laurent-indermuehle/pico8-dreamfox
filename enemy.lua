@@ -2,8 +2,8 @@ function new_enemy()
 
 
   local enemy = {
-    x = rnd(127),
-    y = rnd(127),
+    x = rnd(120),
+    y = rnd(120),
     sprite = 2,
     next_asleep = next_time_asleep(),
     draw = function(_ENV)
