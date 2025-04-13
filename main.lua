@@ -5,8 +5,8 @@ function _init()
 	w = 128
 	h = 128
 	enemies_count = 5
-	enemy_min_before_asleep = 300
-	enemy_max_before_asleep = 6000
+	enemy_min_before_asleep = 100
+	enemy_max_before_asleep = 2000
 
 	enemies = {}
 	for _ = 1, enemies_count do
