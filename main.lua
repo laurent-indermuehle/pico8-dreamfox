@@ -2,10 +2,12 @@ function _init()
 	log("game initialized")
 
 	--config
-	enemies_count=3
+	w=128
+	h=128
+	enemies_count=5
 
 	enemies={}
-	for i=1,enemies_count do
+	for _=1, enemies_count do
 		enemy = new_enemy(
 			rnd(127),
 			rnd(127)
@@ -16,7 +18,7 @@ function _init()
 end
 
 function _update60()
-	player:update()
+	move(player)
 end
 
 function _draw()
