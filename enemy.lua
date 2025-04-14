@@ -5,9 +5,10 @@ function new_enemy()
     x = rnd(120),
     y = rnd(120),
     sprite = 2,
+    flipx = rnd({true, false}),
     next_asleep = next_time_asleep(),
     draw = function(_ENV)
-      spr(sprite, x, y)
+      spr(sprite, x, y, 1, 1, flipx)
     end,
   }
 
