@@ -4,7 +4,7 @@ function _init()
 	--config
 	w = 128
 	h = 128
-	enemies_count = 5
+	enemies_count = 7
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 2000
 	drop_food_min_interv = 180
