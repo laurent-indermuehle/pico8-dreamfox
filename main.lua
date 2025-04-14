@@ -4,10 +4,10 @@ function _init()
 	--config
 	w = 128
 	h = 128
-	enemies_count = 7
+	enemies_count = 15
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 2000
-	drop_food_min_interv = 180
+	drop_food_min_interv = 60
 	foods={}
 
 	enemies = {}
@@ -23,22 +23,21 @@ function _update60()
 	player:update()
 
 	for enemy in all(enemies) do
-		enemy.next_asleep -= 1
-		if enemy.next_asleep <= 0 then
-			sleep(enemy)
-		end
+		enemy:update()
 	end
 end
 
 function _draw()
 	cls()
-	player:draw()
-	for enemy in all(enemies) do
-		enemy:draw()
-	end
-
 	for food in all(foods) do
 		--      spr,      x,       y,    width,  height,  flip x,  flip y
 		spr(food[1], food[2], food[3], food[4], food[5], food[6], food[7])
 	end
+	
+	for enemy in all(enemies) do
+		enemy:draw()
+	end
+	
+	player:draw()
+
 end

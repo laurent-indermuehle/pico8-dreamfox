@@ -2,59 +2,45 @@ function log(text)
 	printh(text, "office/log", false)
 end
 
-function move(o)
 
-	local lastx = o.x
-	local lasty = o.y
-
-  -- up
-  if (btn(2)) then
-    o.y-=1
-    o.flipy = false
-    o.sprit = 1
-    if collision(o) then
-      o.y = lasty
-    end
-  end
-
-  -- down
-  if (btn(3)) then
-    o.y+=1
-    o.flipy = true
-    o.sprit = 1
-    if collision(o) then
-      o.y = lasty
-    end
-  end
-
-  -- left
-  if (btn(0)) then
-    o.x-=1
-    o.flipx = true
-    o.flipy = false
-    o.sprit = 0
-    if collision(o) then
-      o.x = lastx
-    end
-  end
-
-  -- right
-  if (btn(1)) then
-    o.x+=1
-    o.flipx = false
-    o.flipy = false
-    o.sprit = 0
-    if collision(o) then
-      o.x = lastx
-    end
+function move_left(o, speed)
+  local last_x = o.x
+  o.x -= 0.1 * o.speed
+  o.flip_x = true
+  if collision(o) then
+    o.x = last_x
   end
 end
 
+function move_right(o, speed)
+	local last_x = o.x
+  o.x += 0.1 * o.speed
+  o.flip_x = false
+  if collision(o) then
+    o.x = last_x
+  end
+end
+
+function move_up(o, speed)
+	local last_y = o.y
+  o.y -= 0.1 * o.speed
+  if collision(o) then
+    o.y = last_y
+  end
+end
+
+function move_down(o, speed)
+  local last_y = o.y
+  o.y += 0.1 * o.speed
+  if collision(o) then
+    o.y = last_y
+  end
+end
 
 function collision(o)
 
 	local colli = false
-	local colliworld = false
+	local colli_world = false
 
   if (o.colli) then
 	  local x1=o.x/8
@@ -71,8 +57,8 @@ function collision(o)
   end
   
   -- collision with world
-  if (o.colliword) then
-    colliword=(
+  if (o.colli_word) then
+    colli_word=(
       o.x<0 or
       o.x+8>w or
       o.y<0 or
@@ -80,5 +66,5 @@ function collision(o)
     )
   end
   
-  return colli or colliword
+  return colli or colli_word
 end

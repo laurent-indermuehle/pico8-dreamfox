@@ -5,11 +5,49 @@ function new_enemy()
     x = rnd(120),
     y = rnd(120),
     sprite = 2,
-    flipx = rnd({true, false}),
+    sprite_1 = 2,
+    sprite_2 = 2,
+    flip_x = false,
+    move_count = 0,
+    speed = rnd(7),
+    direction = flr(rnd(4)),
+    dir_change_timer = 0,
+    -- Change direction every 15-45 frames
+    dir_change_delay = flr(rnd(30)) + 15,
     next_asleep = next_time_asleep(),
+    colli_word = true,
     draw = function(_ENV)
-      spr(sprite, x, y, 1, 1, flipx)
+      spr(sprite, x, y, 1, 1, flip_x)
     end,
+
+    update = function(self)
+      self.next_asleep -= 1
+      if self.next_asleep <= 0 then
+        sleep(self)
+      else
+        self.dir_change_timer += 1
+        
+        -- Check if it's time to change direction
+        if self.dir_change_timer >= self.dir_change_delay then
+          self.speed = rnd(7)
+          self.direction = flr(rnd(4))
+          self.dir_change_timer = 0
+          self.dir_change_delay = flr(rnd(30)) + 15
+        end
+        
+        -- Apply the current direction's movement
+        if self.direction == 0 then
+          move_left(self)
+        elseif self.direction == 1 then
+          move_right(self)
+        elseif self.direction == 2 then
+          move_up(self)
+        elseif self.direction == 3 then
+          move_down(self)
+        end
+      end
+    end,
+
   }
 
   return enemy
