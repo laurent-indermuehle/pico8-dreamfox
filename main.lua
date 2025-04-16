@@ -68,9 +68,9 @@ function _draw()
 	player:draw()
 
 	if current_state.name == "day" then
-		print("nobody sleep! " .. time_spent_current_state)
+		print("Wake up! " .. time_spent_current_state)
 	else
-		print("everybody goes to bed! " .. time_spent_current_state)
+		print("Sleep! " .. time_spent_current_state)
 	end
 
 end
