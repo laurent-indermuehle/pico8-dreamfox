@@ -1,10 +1,15 @@
 player={
   x = 0,
   y = 0,
-  sprie = 0,
-  sprite_1 = 0,
-  sprite_2 = 1,
-  sprite_threshold = 10,
+  sprite = 0,
+  animations = {
+    walk = {
+      sprites = { 0, 1 },
+      tick = 0,
+      frame = 0,
+      step = 4,
+    },
+  },
   flip_x = false,
   speed = 10,
   colli = true,
@@ -16,33 +21,26 @@ player={
     self.last_drop_food += 1
 
     if (btn(0)) then
-      self.move_count += 1
+      animate(self.animations.walk)
       move_left(self)
     end
 
     if (btn(1)) then
-      self.move_count += 1
+      animate(self.animations.walk)
       move_right(self)
     end
 
     if (btn(2)) then
-      self.move_count += 1
+      animate(self.animations.walk)
       move_up(self)
     end
 
     if (btn(3)) then
-      self.move_count += 1
+      animate(self.animations.walk)
       move_down(self)
     end
 
-    if self.move_count > self.sprite_threshold then
-      self.move_count = 0
-      if self.sprite == self.sprite_1 then
-        self.sprite = self.sprite_2
-      else
-        self.sprite = self.sprite_1
-      end
-    end
+    self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
 
     if self.last_drop_food < drop_food_min_interv then
       return

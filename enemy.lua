@@ -4,9 +4,15 @@ function new_enemy()
   local enemy = {
     x = rnd(120),
     y = rnd(120),
-    sprite = 2,
-    sprite_1 = 2,
-    sprite_2 = 2,
+    sprite = 16,
+    animations = {
+      walk = {
+        sprites = { 16, 17, 18, 19 },
+        tick = 0,
+        frame = 16,
+        step = 12,
+      },
+    },
     flip_x = false,
     move_count = 0,
     speed = rnd(7),
@@ -45,6 +51,11 @@ function new_enemy()
         elseif self.direction == 3 then
           move_down(self)
         end
+
+        if self.speed > 0 then
+          animate(self.animations.walk)
+          self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
+        end
       end
     end,
 
@@ -54,10 +65,10 @@ function new_enemy()
 end
 
 function sleep(enemy)
-  enemy.sprite = 3
+  enemy.sprite = 20
   
   if check_collision(enemy) then
-    enemy.sprite = 2  -- Wake up
+    enemy.sprite = 16  -- Wake up
     enemy.next_asleep = next_time_asleep()
   end
 end

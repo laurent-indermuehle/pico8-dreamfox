@@ -68,3 +68,11 @@ function collision(o)
   
   return colli or colli_word
 end
+
+-- https://mboffin.itch.io/pico8-simple-animation
+function animate(o)
+  o.tick = (o.tick + 1) % o.step
+  if (o.tick == 0) then
+    o.frame = o.frame % #o.sprites + 1
+  end
+end
