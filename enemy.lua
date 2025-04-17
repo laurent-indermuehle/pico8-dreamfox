@@ -12,6 +12,12 @@ function new_enemy()
         frame = 16,
         step = 12,
       },
+      wake_up = {
+        sprites = { 21, 22 },
+        tick = 0,
+        frame = 21,
+        step = 4,
+      },
     },
     flip_x = false,
     move_count = 0,
@@ -21,6 +27,7 @@ function new_enemy()
     -- Change direction every 15-45 frames
     dir_change_delay = flr(rnd(30)) + 15,
     next_asleep = next_time_asleep(),
+    wake_up = 0,
     colli_word = true,
     draw = function(_ENV)
       spr(sprite, x, y, 1, 1, flip_x)
@@ -52,6 +59,13 @@ function new_enemy()
           move_down(self)
         end
 
+        if self.wake_up > 0 then
+          self.wake_up -= 1
+          animate(self.animations.wake_up)
+          self.sprite = self.animations.wake_up.sprites[self.animations.wake_up.frame]
+          return  -- skip walking animation
+        end
+
         if self.speed > 0 then
           animate(self.animations.walk)
           self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
@@ -68,8 +82,8 @@ function sleep(enemy)
   enemy.sprite = 20
   
   if check_collision(enemy) then
-    enemy.sprite = 16  -- Wake up
     enemy.next_asleep = next_time_asleep()
+    enemy.wake_up = 60
   end
 end
 
