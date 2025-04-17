@@ -40,6 +40,10 @@ player={
       move_down(self)
     end
 
+    if (btnp(4)) then
+      sfx(1)
+    end
+
     self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
 
     if self.last_drop_food < drop_food_min_interv then

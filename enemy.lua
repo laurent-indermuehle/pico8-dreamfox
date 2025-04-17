@@ -84,6 +84,7 @@ function sleep(enemy)
   if check_collision(enemy) then
     enemy.next_asleep = next_time_asleep()
     enemy.wake_up = 60
+    sfx(0)
   end
 end
 
