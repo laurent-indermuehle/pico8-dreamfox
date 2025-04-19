@@ -4,7 +4,7 @@ function _init()
 	-- config
 	w = 128
 	h = 128
-	enemies_count = 15
+	enemies_count = 16
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 2000
 	drop_food_min_interv = 60
@@ -17,8 +17,9 @@ function _init()
 	night = {
 		name = "night",
 		duration = 800,
-		color_ground = 0
+		color_ground = 1
 	}
+
 
 	-- data containers
 	current_state = day
@@ -54,6 +55,9 @@ end
 
 function _draw()
 
+	-- Set transparency
+	palt(0, false)
+	palt(2, true)
 	cls(current_state.color_ground)
 
 	for food in all(foods) do
