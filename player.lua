@@ -1,13 +1,13 @@
 player={
   x = 0,
   y = 0,
-  sprite = 0,
+  sprite = 8,
   animations = {
     walk = {
-      sprites = { 0, 1 },
+      sprites = { 8, 10, 12, 14 },
       tick = 0,
-      frame = 0,
-      step = 4,
+      frame = 1,
+      step = 8,
     },
   },
   flip_x = false,
@@ -61,7 +61,7 @@ player={
   end,
 
   draw=function(self)
-    spr(self.sprite, self.x, self.y, 1, 1, self.flip_x)
+    spr(self.sprite, self.x, self.y, 2, 2, self.flip_x)
   end,
 
   drop_food=function(self)
