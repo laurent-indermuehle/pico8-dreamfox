@@ -9,13 +9,13 @@ function new_enemy()
       walk = {
         sprites = { 16, 17, 18, 19 },
         tick = 0,
-        frame = 16,
+        frame = 1,
         step = 12,
       },
       wake_up = {
         sprites = { 21, 22 },
         tick = 0,
-        frame = 21,
+        frame = 1,
         step = 4,
       },
     },
