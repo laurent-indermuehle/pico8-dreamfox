@@ -6,7 +6,7 @@ function _init()
 	h = 128
 	enemies_count = 16
 	enemy_min_before_asleep = 100
-	enemy_max_before_asleep = 2000
+	enemy_max_before_asleep = 1000
 	drop_food_min_interv = 60
 	foods = {}
 	day = {
