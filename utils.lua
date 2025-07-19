@@ -47,15 +47,15 @@ function collision(o)
  	  local y1=o.y/8
     local x2=(o.x+7)/8
     local y2=(o.y+7)/8
-    
+
     local a=fget(mget(x1,y1),0)
     local b=fget(mget(x1,y2),0)
     local c=fget(mget(x2,y2),0)
     local d=fget(mget(x2,y1),0)
-  
+
   		colli = a or b or c or d
   end
-  
+
   -- collision with world
   if (o.colli_word) then
     colli_word=(
@@ -65,7 +65,7 @@ function collision(o)
       o.y+8>h
     )
   end
-  
+
   return colli or colli_word
 end
 

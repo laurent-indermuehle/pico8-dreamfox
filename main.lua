@@ -64,11 +64,11 @@ function _draw()
 		--      spr,      x,       y,    width,  height,  flip x,  flip y
 		spr(food[1], food[2], food[3], food[4], food[5], food[6], food[7])
 	end
-	
+
 	for enemy in all(enemies) do
 		enemy:draw()
 	end
-	
+
 	player:draw()
 
 	if current_state.name == "day" then

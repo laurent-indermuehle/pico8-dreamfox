@@ -39,7 +39,7 @@ function new_enemy()
         sleep(self)
       else
         self.dir_change_timer += 1
-        
+
         -- Check if it's time to change direction
         if self.dir_change_timer >= self.dir_change_delay then
           self.speed = rnd(7)
@@ -47,7 +47,7 @@ function new_enemy()
           self.dir_change_timer = 0
           self.dir_change_delay = flr(rnd(30)) + 15
         end
-        
+
         -- Apply the current direction's movement
         if self.direction == 0 then
           move_left(self)
@@ -80,7 +80,7 @@ end
 
 function sleep(enemy)
   enemy.sprite = 20
-  
+
   if check_collision(enemy) then
     enemy.next_asleep = next_time_asleep()
     enemy.wake_up = 60
@@ -99,7 +99,7 @@ function check_collision(enemy)
   local e_right = enemy.x + 7
   local e_top = enemy.y
   local e_bottom = enemy.y + 7
-  
+
   -- Player's four corners
   local corners = {
     {player.x, player.y},         -- Top-left
@@ -107,17 +107,17 @@ function check_collision(enemy)
     {player.x, player.y + 7},     -- Bottom-left
     {player.x + 7, player.y + 7}  -- Bottom-right
   }
-  
+
   -- Check if any player corner is inside the enemy sprite
   for i=1,4 do
     local corner_x = corners[i][1]
     local corner_y = corners[i][2]
-    
-    if corner_x >= e_left and corner_x <= e_right and 
+
+    if corner_x >= e_left and corner_x <= e_right and
        corner_y >= e_top and corner_y <= e_bottom then
       return true
     end
   end
-  
+
   return false
 end
