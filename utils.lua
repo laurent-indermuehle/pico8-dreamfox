@@ -1,5 +1,5 @@
 function log(text)
-	printh(text, "office/log", false)
+	printh(text, "dreamfox/log", false)
 end
 
 
