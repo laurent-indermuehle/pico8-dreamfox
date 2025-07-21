@@ -2,7 +2,7 @@ function _init()
 	log("game initialized")
 
 	-- config
-	timeline_height = 5
+	timeline_height = 6
 	w = 128
 	h = 128
 	enemies_count = 16
@@ -75,11 +75,11 @@ function _draw()
 	player:draw()
 
 	if current_state.name == "day" then
-		rectfill(0, 5, 128 , 0, 1)
+		rectfill(0, timeline_height, timeline, 0, 1)
 		rectfill(0, 5, timeline, 0, 2)
 		print("Wake up! ", 4)
 	else
-		rectfill(0, 5, 128 , 0, 3)
+		rectfill(0, timeline_height, timeline, 0, 3)
 		rectfill(0, 5, timeline, 0, 2)
 		print("Sleep! ", 4)
 	end
