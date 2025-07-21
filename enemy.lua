@@ -2,8 +2,9 @@ function new_enemy()
 
 
   local enemy = {
-    x = rnd(120),
-    y = rnd(120),
+    size = 8,
+    x = rnd({8,120}),
+    y = rnd({13,120}),
     sprite = 16,
     animations = {
       walk = {

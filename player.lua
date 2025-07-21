@@ -1,7 +1,8 @@
 player={
-  x = 0,
-  y = 0,
+  x = 30,
+  y = 30,
   sprite = 8,
+  size = 16,
   animations = {
     walk = {
       sprites = { 8, 10, 12, 14 },

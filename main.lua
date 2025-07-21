@@ -2,6 +2,7 @@ function _init()
 	log("game initialized")
 
 	-- config
+	timeline_height = 5
 	w = 128
 	h = 128
 	enemies_count = 16

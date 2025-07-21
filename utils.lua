@@ -60,9 +60,9 @@ function collision(o)
   if (o.colli_word) then
     colli_word=(
       o.x<0 or
-      o.x+8>w or
-      o.y<0 or
-      o.y+8>h
+      o.x+o.size-1>w or
+      o.y<=timeline_height+1 or
+      o.y+o.size-1>h
     )
   end
 
