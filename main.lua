@@ -9,6 +9,7 @@ function _init()
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 1000
 	drop_food_min_interv = 60
+	score = 0
 	foods = {}
 	day = {
 		name = "day",
@@ -76,12 +77,12 @@ function _draw()
 
 	if current_state.name == "day" then
 		rectfill(0, timeline_height, timeline, 0, 1)
-		rectfill(0, 5, timeline, 0, 2)
-		print("Wake up! ", 4)
+		print("Wake up! ", 1, 1, 4)
 	else
 		rectfill(0, timeline_height, timeline, 0, 3)
-		rectfill(0, 5, timeline, 0, 2)
-		print("Sleep! ", 4)
+		print("Sleep! ", 1, 1, 4)
 	end
+
+	print(score, 120, 1, 4)
 
 end
