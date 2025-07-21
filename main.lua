@@ -35,7 +35,7 @@ end
 function _update60()
 
 	time_spent_current_state += 1
-	timeline = flr(-128 * current_state.duration / time_spent_current_state)
+	timeline = flr(128 * (time_spent_current_state / current_state.duration))
 
 	if time_spent_current_state > current_state.duration then
 		time_spent_current_state = 0
@@ -76,11 +76,11 @@ function _draw()
 	if current_state.name == "day" then
 		rectfill(0, 5, 128 , 0, 1)
 		rectfill(0, 5, timeline, 0, 2)
-		print("Wake up! " .. timeline)
+		print("Wake up! ", 4)
 	else
 		rectfill(0, 5, 128 , 0, 3)
 		rectfill(0, 5, timeline, 0, 2)
-		print("Sleep! " .. timeline)
+		print("Sleep! ", 4)
 	end
 
 end
