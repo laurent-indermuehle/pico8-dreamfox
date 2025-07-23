@@ -1,6 +1,7 @@
 player={
   x = 30,
   y = 30,
+  last_dir = "upright",
   sprite = 32,
   size = 8,
   animations = {
@@ -21,24 +22,44 @@ player={
   update=function(self)
     self.last_action += 1
 
-    if (btn(0)) then
+    if btn(0) then
       animate(self.animations.walk)
-      move_left(self)
+      move(self, -1, 0)
+      self.last_dir = "left"
     end
 
-    if (btn(1)) then
+    if btn(1) then
       animate(self.animations.walk)
-      move_right(self)
+      move(self, 1, 0)
+      self.last_dir = "right"
     end
 
-    if (btn(2)) then
+    if btn(2) then
       animate(self.animations.walk)
-      move_up(self)
+      if btn(0) then
+        move(self, -1, -1)
+        self.last_dir = "upleft"
+      elseif btn(1) then
+        move(self, 1, -1)
+        self.last_dir = "upright"
+      else
+        move(self, 0, -1)
+        self.last_dir = "up"
+      end
     end
 
-    if (btn(3)) then
+    if btn(3) then
       animate(self.animations.walk)
-      move_down(self)
+      if btn(0) then
+        move(self, -1, 1)
+        self.last_dir = "downleft"
+      elseif btn(1) then
+        move(self, 1, 1)
+        self.last_dir = "downright"
+      else
+        move(self, 0, 1)
+        self.last_dir = "down"
+      end
     end
 
     self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
@@ -56,7 +77,8 @@ player={
       if current_state.name == "day" then
         self:drop_food()
       else
-        sfx(1)
+        self:drop_food()
+        -- sfx(1)
       end
       self.last_action = 0
     end
@@ -68,16 +90,16 @@ player={
   end,
 
   drop_food=function(self)
+
     food={
-      4,          -- sprite number
-      self.x,     -- x position
-      self.y,     -- y position
-      1,          -- width
-      1,          -- height
-      rnd({true, false}),  -- flip x
-      rnd({true, false})   -- flip y
+      sprite = 4,
+      x = self.x,
+      y = self.y,
+      duration = 0,
+      max_duration = 30,
+      direction = self.last_dir
     }
 
-    add(foods, food)
+    add(particules, food)
   end,
 }

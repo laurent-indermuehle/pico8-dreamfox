@@ -2,6 +2,25 @@ function log(text)
 	printh(text, "dreamfox/log", false)
 end
 
+function move(o, x, y, speed)
+  local last_x = o.x
+  local last_y = o.y
+  if x > 0 then
+    o.x += (0.1 * o.speed) + x
+  elseif x < 0 then
+    o.x -= (0.1 * o.speed) - x
+  end
+  if y > 0 then
+    o.y += (0.1 * o.speed) + y
+  elseif y < 0 then
+    o.y -= (0.1 * o.speed) - y
+  end
+  o.flip_x = (x < 0)
+  if collision(o) then
+    o.x = last_x
+    o.y = last_y
+  end
+end
 
 function move_left(o, speed)
   local last_x = o.x

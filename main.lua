@@ -8,7 +8,7 @@ function _init()
 	enemies_count = 16
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 1000
-	action_min_interv = 60
+	action_min_interv = 1
 	day = {
 		name = "day",
 		duration = 1000,
@@ -22,7 +22,7 @@ function _init()
 
 	-- data containers
 	score = 0
-	foods = {}
+	particules = {}
 	current_state = day
 	time_spent_current_state = 0
 	enemies = {}
@@ -41,6 +41,7 @@ function _update60()
 	if time_spent_current_state > current_state.duration then
 		time_spent_current_state = 0
 		timeline = 0
+		particules = {}
 
 		if current_state.name == "day" then
 			current_state = night
@@ -63,9 +64,35 @@ function _draw()
 	palt(2, true)
 	cls(current_state.color_ground)
 
-	for food in all(foods) do
-		--      spr,      x,       y,    width,  height,  flip x,  flip y
-		spr(food[1], food[2], food[3], food[4], food[5], food[6], food[7])
+	for part in all(particules) do
+		spr(part.sprite, part.x, part.y, 1, 1)
+
+		if part.direction == "right" then
+			part.x += 1
+		elseif part.direction == "downright" then
+			part.x += 1
+			part.y += 1
+		elseif part.direction == "down" then
+			part.y += 1
+		elseif part.direction == "downleft" then
+			part.x -= 1
+			part.y += 1
+		elseif part.direction == "left" then
+			part.x -= 1
+		elseif part.direction == "upleft" then
+			part.x -= 1
+			part.y -= 1
+		elseif part.direction == "up" then
+			part.y -= 1
+		elseif part.direction == "upright" then
+			part.x += 1
+			part.y -= 1
+		end
+
+		part.duration += 1
+		if part.duration > part.max_duration then
+			del(particules, part)
+		end
 	end
 
 	for enemy in all(enemies) do
