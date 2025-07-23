@@ -1,11 +1,11 @@
 player={
   x = 30,
   y = 30,
-  sprite = 8,
-  size = 16,
+  sprite = 32,
+  size = 8,
   animations = {
     walk = {
-      sprites = { 8, 10, 12, 14 },
+      sprites = { 32, 33, 34, 35 },
       tick = 0,
       frame = 1,
       step = 8,
@@ -62,7 +62,8 @@ player={
   end,
 
   draw=function(self)
-    spr(self.sprite, self.x, self.y, 2, 2, self.flip_x)
+    local sprite_cells = flr(self.size / 8)
+    spr(self.sprite, self.x, self.y, sprite_cells, sprite_cells, self.flip_x)
   end,
 
   drop_food=function(self)
