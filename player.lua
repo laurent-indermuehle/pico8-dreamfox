@@ -15,11 +15,11 @@ player={
   speed = 10,
   colli = true,
   colli_word = true,
-  last_drop_food = 0,
+  last_action = 0,
   move_count = 0,
 
   update=function(self)
-    self.last_drop_food += 1
+    self.last_action += 1
 
     if (btn(0)) then
       animate(self.animations.walk)
@@ -41,13 +41,9 @@ player={
       move_down(self)
     end
 
-    if (btnp(4)) then
-      sfx(1)
-    end
-
     self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
 
-    if self.last_drop_food < drop_food_min_interv then
+    if self.last_action < action_min_interv then
       return
     end
 
@@ -56,8 +52,13 @@ player={
     -- button X
     if (btn(5)) then
       log("X pressed")
-      self:drop_food()
-      self.last_drop_food = 0
+      -- day
+      if current_state.name == "day" then
+        self:drop_food()
+      else
+        sfx(1)
+      end
+      self.last_action = 0
     end
   end,
 

@@ -8,7 +8,7 @@ function _init()
 	enemies_count = 16
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 1000
-	drop_food_min_interv = 60
+	action_min_interv = 60
 	day = {
 		name = "day",
 		duration = 1000,

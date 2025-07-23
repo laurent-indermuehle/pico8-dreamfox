@@ -2,7 +2,6 @@
 A Pico-8 game cartridge.
 
 ## ToDo list
-- Change to single button and make action depends on day-night state
 - Change colision detetection from player to seeds and music notes.
 - Add particule generator for seeds and music notes
 - Add animation of the fox throwing seeds
