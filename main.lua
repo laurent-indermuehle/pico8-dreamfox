@@ -9,8 +9,6 @@ function _init()
 	enemy_min_before_asleep = 100
 	enemy_max_before_asleep = 1000
 	drop_food_min_interv = 60
-	score = 0
-	foods = {}
 	day = {
 		name = "day",
 		duration = 1000,
@@ -22,8 +20,9 @@ function _init()
 		color_ground = 1
 	}
 
-
 	-- data containers
+	score = 0
+	foods = {}
 	current_state = day
 	time_spent_current_state = 0
 	enemies = {}
