@@ -66,28 +66,8 @@ function _draw()
 
 	for part in all(particules) do
 		spr(part.sprite, part.x, part.y, 1, 1)
-
-		if part.direction == "right" then
-			part.x += 1
-		elseif part.direction == "downright" then
-			part.x += 1
-			part.y += 1
-		elseif part.direction == "down" then
-			part.y += 1
-		elseif part.direction == "downleft" then
-			part.x -= 1
-			part.y += 1
-		elseif part.direction == "left" then
-			part.x -= 1
-		elseif part.direction == "upleft" then
-			part.x -= 1
-			part.y -= 1
-		elseif part.direction == "up" then
-			part.y -= 1
-		elseif part.direction == "upright" then
-			part.x += 1
-			part.y -= 1
-		end
+		part.x += part.dir_x
+		part.y += part.dir_y
 
 		part.duration += 1
 		if part.duration > part.max_duration then

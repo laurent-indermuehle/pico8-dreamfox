@@ -1,7 +1,8 @@
 player={
   x = 30,
   y = 30,
-  last_dir = "upright",
+  last_dir_x = 1,
+  last_dir_y = 0,
   sprite = 32,
   size = 8,
   animations = {
@@ -13,7 +14,7 @@ player={
     },
   },
   flip_x = false,
-  speed = 10,
+  speed = 0.5,
   colli = true,
   colli_word = true,
   last_action = 0,
@@ -22,44 +23,14 @@ player={
   update=function(self)
     self.last_action += 1
 
-    if btn(0) then
+    local dx, dy = get_input_direction()
+    self.x += dx * self.speed
+    self.y += dy * self.speed
+    if dx != 0 or dy != 0 then
       animate(self.animations.walk)
-      move(self, -1, 0)
-      self.last_dir = "left"
-    end
-
-    if btn(1) then
-      animate(self.animations.walk)
-      move(self, 1, 0)
-      self.last_dir = "right"
-    end
-
-    if btn(2) then
-      animate(self.animations.walk)
-      if btn(0) then
-        move(self, -1, -1)
-        self.last_dir = "upleft"
-      elseif btn(1) then
-        move(self, 1, -1)
-        self.last_dir = "upright"
-      else
-        move(self, 0, -1)
-        self.last_dir = "up"
-      end
-    end
-
-    if btn(3) then
-      animate(self.animations.walk)
-      if btn(0) then
-        move(self, -1, 1)
-        self.last_dir = "downleft"
-      elseif btn(1) then
-        move(self, 1, 1)
-        self.last_dir = "downright"
-      else
-        move(self, 0, 1)
-        self.last_dir = "down"
-      end
+      -- update last known direction if we're moving
+      self.last_dir_x = dx
+      self.last_dir_y = dy
     end
 
     self.sprite = self.animations.walk.sprites[self.animations.walk.frame]
@@ -97,9 +68,37 @@ player={
       y = self.y,
       duration = 0,
       max_duration = 30,
-      direction = self.last_dir
+      dir_x = self.last_dir_x,
+      dir_y = self.last_dir_y
     }
 
     add(particules, food)
   end,
 }
+
+function get_input_direction()
+  local left = btn(0)
+  local right = btn(1)
+  local up = btn(2)
+  local down = btn(3)
+
+  -- cancel out opposing directions
+  if left and right then left, right = false, false end
+  if up and down then up, down = false, false end
+
+  -- calculate raw direction
+  local dx, dy = 0, 0
+  if right then dx = 1 end
+  if left then dx = -1 end
+  if up then dy = -1 end
+  if down then dy = 1 end
+
+  -- fix diagonal speed issue by scaling diagonal movement
+  if dx != 0 and dy != 0 then
+    -- diagonal movement: scale by ~0.707 (approx 181/256)
+    dx = dx * 181 / 256
+    dy = dy * 181 / 256
+  end
+
+  return dx, dy
+end
