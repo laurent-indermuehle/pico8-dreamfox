@@ -26,6 +26,13 @@ player={
     local dx, dy = get_input_direction()
     self.x += dx * self.speed
     self.y += dy * self.speed
+    
+    if dx > 0 then
+      self.flip_x = false
+    elseif dx < 0 then
+      self.flip_x = true
+    end
+
     if dx != 0 or dy != 0 then
       animate(self.animations.walk)
       -- update last known direction if we're moving
