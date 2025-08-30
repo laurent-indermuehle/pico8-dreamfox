@@ -26,6 +26,10 @@ player={
     local dx, dy = get_input_direction()
     self.x += dx * self.speed
     self.y += dy * self.speed
+
+    -- Maintain the player inside screen
+    self.x = mid(0, self.x, 127 - self.size)
+    self.y = mid(0 + timeline_height, self.y, 127 - self.size)
     
     if dx > 0 then
       self.flip_x = false
